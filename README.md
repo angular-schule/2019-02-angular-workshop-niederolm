@@ -56,7 +56,7 @@ ng version
 
 ## Startprojekt erzeugen
 
-Für den *Angular Refresh* an Tag 1 wollen wir gemeinsam ein Beispielprojekt entwickeln
+Für den *Angular Refresh* an Tag 1 wollen wir gemeinsam ein Beispielprojekt entwickeln.
 Bitte lege dazu Übungsprojekt schon vor Beginn des Workshops an.
 Die Angular CLI nimmt uns die meisten Schritte schon ab.
 Führe in Deinem Arbeitsverzeichnis die folgenden Befehle aus:
