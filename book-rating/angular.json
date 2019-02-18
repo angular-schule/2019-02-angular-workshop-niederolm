@@ -169,6 +169,134 @@
           }
         }
       }
+    },
+    "book-rating-light": {
+      "root": "projects/book-rating-light/",
+      "sourceRoot": "projects/book-rating-light/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/book-rating-light",
+            "index": "projects/book-rating-light/src/index.html",
+            "main": "projects/book-rating-light/src/main.ts",
+            "polyfills": "projects/book-rating-light/src/polyfills.ts",
+            "tsConfig": "projects/book-rating-light/tsconfig.app.json",
+            "assets": [
+              "projects/book-rating-light/src/favicon.ico",
+              "projects/book-rating-light/src/assets"
+            ],
+            "styles": [
+              "projects/book-rating-light/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/book-rating-light/src/environments/environment.ts",
+                  "with": "projects/book-rating-light/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "book-rating-light:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "book-rating-light:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "book-rating-light:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/book-rating-light/src/test.ts",
+            "polyfills": "projects/book-rating-light/src/polyfills.ts",
+            "tsConfig": "projects/book-rating-light/tsconfig.spec.json",
+            "karmaConfig": "projects/book-rating-light/karma.conf.js",
+            "styles": [
+              "projects/book-rating-light/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/book-rating-light/src/favicon.ico",
+              "projects/book-rating-light/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/book-rating-light/tsconfig.app.json",
+              "projects/book-rating-light/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "book-rating-light-e2e": {
+      "root": "projects/book-rating-light-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/book-rating-light-e2e/protractor.conf.js",
+            "devServerTarget": "book-rating-light:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "book-rating-light:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/book-rating-light-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "book-rating"
