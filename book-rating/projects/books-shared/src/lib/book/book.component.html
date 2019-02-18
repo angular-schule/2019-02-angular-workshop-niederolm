@@ -14,5 +14,10 @@
     <div>Preis: {{ book.price }} </div>
 
     <p>{{ book.description }}</p>
+
+    <button class="btn btn-secondary mr-2" (click)="rateUp()">+</button>
+    <button class="btn btn-secondary mr-2" (click)="rateDown()">–</button>
   </div>
 </div>
+
+{{ log() }}

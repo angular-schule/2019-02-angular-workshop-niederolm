@@ -1,6 +1,7 @@
 <lib-book
   *ngFor="let b of books"
-  [book]="b"></lib-book>
+  [book]="b"
+  (rate)="updateList($event)"></lib-book>
 
 
 <br-fancy-button></br-fancy-button>

@@ -31,4 +31,8 @@ export class DashboardComponent implements OnInit {
     ];
   }
 
+  updateList(book: Book) {
+    this.books = this.books.map(b => b.isbn === book.isbn ? book : b);
+  }
+
 }
