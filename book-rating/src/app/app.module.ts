@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BooksModule } from './books/books.module';
-import { BookRatingService } from 'books-shared/lib/shared/book-rating.service';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,7 @@ import { BookRatingService } from 'books-shared/lib/shared/book-rating.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BooksModule
   ],
   providers: [],

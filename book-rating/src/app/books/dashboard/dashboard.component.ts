@@ -14,7 +14,10 @@ export class DashboardComponent implements OnInit {
   constructor(private bs: BookStoreService) { }
 
   ngOnInit() {
-    this.books = this.bs.getAllStatic();
+    // this.books = this.bs.getAllStatic();
+
+    this.bs.getAll()
+      .subscribe(books => this.books = books);
   }
 
   updateList(book: Book) {
