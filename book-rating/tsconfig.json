@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "books-shared": [
+        "dist/books-shared"
+      ],
+      "books-shared/*": [
+        "dist/books-shared/*"
+      ]
+    }
   }
 }

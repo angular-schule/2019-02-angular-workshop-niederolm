@@ -134,6 +134,41 @@
           }
         }
       }
+    },
+    "books-shared": {
+      "root": "projects/books-shared",
+      "sourceRoot": "projects/books-shared/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/books-shared/tsconfig.lib.json",
+            "project": "projects/books-shared/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/books-shared/src/test.ts",
+            "tsConfig": "projects/books-shared/tsconfig.spec.json",
+            "karmaConfig": "projects/books-shared/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/books-shared/tsconfig.lib.json",
+              "projects/books-shared/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "book-rating"

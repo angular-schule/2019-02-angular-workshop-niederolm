@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../shared/book';
+import { Book } from 'books-shared';
 
 @Component({
   selector: 'br-dashboard',
