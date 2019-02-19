@@ -4,4 +4,13 @@
   </div>
 </form>
 
+<strong *ngIf="isLoading">Wird geladen…</strong>
+
+<ul>
+  <li *ngFor="let b of results$ | async">
+    <a [routerLink]="['/books', b.isbn]">{{ b.title }}</a>
+  </li>
+</ul>
+
+
 {{ searchForm.value | json }}

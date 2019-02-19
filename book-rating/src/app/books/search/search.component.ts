@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { BookStoreService } from '../shared/book-store.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Book } from 'books-shared';
 
 @Component({
   selector: 'br-search',
@@ -10,7 +12,10 @@ import { switchMap } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
 
+  isLoading = false;
+
   searchForm: FormGroup;
+  results$: Observable<Book[]>;
 
   constructor(private bs: BookStoreService) { }
 
@@ -19,16 +24,21 @@ export class SearchComponent implements OnInit {
       search: new FormControl('')
     });
 
-    this.searchForm.get('search').valueChanges.pipe(
-      switchMap(term => this.bs.search(term))
-    ).subscribe(e => console.log(e));
+    this.results$ = this.searchForm.get('search').valueChanges.pipe(
+      filter(term => term.length >= 3),
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.isLoading = true),
+      switchMap(term => this.bs.search(term)),
+      tap(() => this.isLoading = false),
+    );
 
       /*
-      Länge >= 3
-      bremsen
-      keine 2 gleichen Suchbegriffe nacheinander
-      Suchergebnisse anzeigen
-
+      Länge >= 3 ✅
+      bremsen ✅
+      keine 2 gleichen Suchbegriffe nacheinander ✅
+      Suchergebnisse anzeigen ✅
+      Ladeanzeige ✅
       */
 
   }
