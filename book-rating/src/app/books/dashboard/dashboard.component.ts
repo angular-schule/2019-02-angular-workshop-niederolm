@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'books-shared';
 import { BookStoreService } from '../shared/book-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'br-dashboard',
@@ -9,19 +10,19 @@ import { BookStoreService } from '../shared/book-store.service';
 })
 export class DashboardComponent implements OnInit {
 
-  books: Book[];
+  books$: Observable<Book[]>;
 
   constructor(private bs: BookStoreService) { }
 
   ngOnInit() {
     // this.books = this.bs.getAllStatic();
 
-    this.bs.getAll()
-      .subscribe(books => this.books = books);
+    this.books$ = this.bs.getAll();
   }
 
   updateList(book: Book) {
-    this.books = this.books.map(b => b.isbn === book.isbn ? book : b);
+    // TODO
+    // this.books = this.books.map(b => b.isbn === book.isbn ? book : b);
   }
 
 }

@@ -21,6 +21,14 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
 
-    // TODO
+    forkJoin(
+      this.msg.julia$.pipe(map(msg => '🙎🏻‍ JULIA: ' + msg)),
+      this.msg.georg$.pipe(map(msg => '🧙🏻‍ GEORG: ' + msg)),
+      this.msg.john$.pipe(map(msg => '🦊 JOHN: ' + msg)),
+    ).subscribe(
+      msg => this.logStream$.next(msg.toString()),
+      () => {},
+      () => this.logStream$.next('🤷🏻‍ Alle weg!')
+    );
   }
 }
