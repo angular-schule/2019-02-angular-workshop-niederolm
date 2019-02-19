@@ -1,0 +1,7 @@
+<form [formGroup]="searchForm">
+  <div class="form-group">
+    <input class="form-control" type="text" formControlName="search">
+  </div>
+</form>
+
+{{ searchForm.value | json }}
