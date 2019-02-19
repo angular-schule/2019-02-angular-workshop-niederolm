@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
 import { Book } from 'books-shared';
 import { Observable } from 'rxjs';
+import { concatMap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'br-book-details',
@@ -21,11 +22,9 @@ export class BookDetailsComponent implements OnInit {
     // Alternative
     // const isbn = this.route.snapshot.paramMap.get('isbn');
 
-    this.route.paramMap.subscribe(params => {
-      const isbn = params.get('isbn');
-      this.book$ = this.bs.getSingle(isbn);
-    }); // TODO: Verschachtete Subscriptions vermeiden
-
+    this.book$ = this.route.paramMap.pipe(
+      switchMap(params => this.bs.getSingle(params.get('isbn')))
+    );
   }
 
 }
