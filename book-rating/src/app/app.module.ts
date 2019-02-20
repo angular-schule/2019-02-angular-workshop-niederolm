@@ -4,10 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StatePlaygroundComponent } from './state-playground/state-playground.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StatePlaygroundComponent
   ],
   imports: [
     BrowserModule,
