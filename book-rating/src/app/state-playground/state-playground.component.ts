@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '../state.service';
 import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { State } from '../reducers';
+import { Increment, Decrement, Reset } from '../actions/counter.actions';
 
 @Component({
   selector: 'br-state-playground',
@@ -9,25 +12,27 @@ import { map } from 'rxjs/operators';
 })
 export class StatePlaygroundComponent implements OnInit {
 
-  counter$ = this.service.state$.pipe(
-    map(state => state.counter)
+  counter$ = this.store.pipe(
+    map(state => state.counter.counter)
   );
 
-  constructor(public service: StateService) { }
+  constructor(
+    public service: StateService,
+    private store: Store<State>) { }
 
   ngOnInit() {
   }
 
   increment() {
-    this.service.dispatch('Increment');
+    this.store.dispatch(new Increment());
   }
 
   decrement() {
-    this.service.dispatch('Decrement');
+    this.store.dispatch(new Decrement());
   }
 
   reset() {
-    this.service.dispatch('Reset');
+    this.store.dispatch(new Reset(0));
   }
 
 }
