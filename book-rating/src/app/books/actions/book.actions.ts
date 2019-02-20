@@ -5,7 +5,9 @@ import { Book } from 'books-shared';
 export enum BookActionTypes {
   LoadBooks = '[Book] Load Books',
   LoadBooksSuccess = '[Book] Load Books Success',
-  LoadBooksFail = '[Book] Load Books Fail'
+  LoadBooksFail = '[Book] Load Books Fail',
+  LoadBook = '[Book] Load Book',
+  LoadBookSuccess = '[Book] Load Book Success'
 }
 
 export class LoadBooks implements Action {
@@ -22,7 +24,19 @@ export class LoadBooksFail implements Action {
   constructor(public payload: { error: HttpErrorResponse }) {}
 }
 
+export class LoadBook implements Action {
+  readonly type = BookActionTypes.LoadBook;
+  constructor(public payload: { isbn: string }) {}
+}
+
+export class LoadBookSuccess implements Action {
+  readonly type = BookActionTypes.LoadBookSuccess;
+  constructor(public payload: { book: Book }) {}
+}
+
 export type BookActions =
  | LoadBooks
  | LoadBooksSuccess
- | LoadBooksFail;
+ | LoadBooksFail
+ | LoadBook
+ | LoadBookSuccess;

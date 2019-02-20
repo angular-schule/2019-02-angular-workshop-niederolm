@@ -23,3 +23,9 @@ export const getLimitedBooks = createSelector(
         return books.slice(0, counter);
     }
 );
+
+
+export const getBookByIsbn = createSelector(
+    getAllBooks,
+    (books, props) => books.find(b => b.isbn === props.isbn) // Parametrized Selector
+);

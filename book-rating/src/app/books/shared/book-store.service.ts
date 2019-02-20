@@ -14,7 +14,7 @@ export class BookStoreService {
 
   getAll(): Observable<Book[]> {
     // TODO: Mapping
-    return this.http.get<Book[]>(this.apiUrl + '/booksfff').pipe(
+    return this.http.get<Book[]>(this.apiUrl + '/books').pipe(
       retry(3),
       map(rawBooks => rawBooks.map(rawBook => this.mapToBook(rawBook))),
       /*catchError(err => {
