@@ -14,13 +14,13 @@ export class BookStoreService {
 
   getAll(): Observable<Book[]> {
     // TODO: Mapping
-    return this.http.get<Book[]>(this.apiUrl + '/books').pipe(
+    return this.http.get<Book[]>(this.apiUrl + '/booksfff').pipe(
       retry(3),
       map(rawBooks => rawBooks.map(rawBook => this.mapToBook(rawBook))),
-      catchError(err => {
+      /*catchError(err => {
         console.error('Fehler:', err);
         return of(this.getAllStatic());
-      })
+      })*/
     );
   }
 

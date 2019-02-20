@@ -1,3 +1,5 @@
+<div *ngIf="loading$ | async">Bücher werden geladen...</div>
+
 <lib-book
   *ngFor="let b of books$ | async"
   [book]="b"
