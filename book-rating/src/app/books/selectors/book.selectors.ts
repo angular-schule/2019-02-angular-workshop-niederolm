@@ -1,9 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from '../reducers/book.reducer';
+import { State, adapter } from '../reducers/book.reducer';
 import { State as CounterState } from '../../reducers/counter.reducer';
 
 export const getBookState = createFeatureSelector<State>('book');
 export const getCounterState = createFeatureSelector<CounterState>('counter');
+
+const adapterSelectors = adapter.getSelectors();
 
 export const getBooksLoading = createSelector(
     getBookState,
@@ -12,7 +14,7 @@ export const getBooksLoading = createSelector(
 
 export const getAllBooks = createSelector(
     getBookState,
-    bookState => bookState.books
+    adapterSelectors.selectAll
 );
 
 export const getLimitedBooks = createSelector(
@@ -24,8 +26,13 @@ export const getLimitedBooks = createSelector(
     }
 );
 
+export const getBookEntities = createSelector(
+    getBookState,
+    adapterSelectors.selectEntities
+);
+
 
 export const getBookByIsbn = createSelector(
-    getAllBooks,
-    (books, props) => books.find(b => b.isbn === props.isbn) // Parametrized Selector
+    getBookEntities,
+    (entities, props) => entities[props.isbn]
 );

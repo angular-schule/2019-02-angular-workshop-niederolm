@@ -1,17 +1,19 @@
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
 
 import { BookActions, BookActionTypes } from '../actions/book.actions';
 import { Book } from 'books-shared';
-import { BookStoreService } from '../shared/book-store.service';
 
-export interface State {
-  books: Book[];
+export const adapter = createEntityAdapter<Book>({
+  selectId: book => book.isbn
+});
+
+export interface State extends EntityState<Book> {
   loading: boolean;
 }
 
-export const initialState: State = {
-  books: [],
+export const initialState: State = adapter.getInitialState({
   loading: false
-};
+});
 
 export function reducer(state = initialState, action: BookActions): State {
   switch (action.type) {
@@ -27,23 +29,14 @@ export function reducer(state = initialState, action: BookActions): State {
       const { books } = action.payload;
 
       return {
-        ...state,
-        books,
+        ...adapter.addAll(books, state),
         loading: false
       };
     }
 
     case BookActionTypes.LoadBookSuccess: {
       const { book } = action.payload;
-      const books = [
-        ...state.books.filter(b => b.isbn !== book.isbn),
-        book
-      ];
-
-      return {
-        ...state,
-        books
-      };
+      return adapter.upsertOne(book, state);
     }
 
     default:
