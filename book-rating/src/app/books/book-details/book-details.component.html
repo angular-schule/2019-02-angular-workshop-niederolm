@@ -1,14 +1,12 @@
-<ng-container *ngIf="book$ | async as book">
-  <h2>{{ book.title }}</h2>
+<h2>{{ book.title }}</h2>
 
-  <p>
-    <strong>ISBN:</strong> {{ book.isbn }}
-  </p>
+<p>
+  <strong>ISBN:</strong> {{ book.isbn }}
+</p>
 
-  <p *ngIf="book.description">
-    {{ book.description }}
-  </p>
-</ng-container>
+<p *ngIf="book.description">
+  {{ book.description }}
+</p>
 
 <a routerLink="/books">Zum Dashboard</a>
 <a routerLink="/books/9783864903571">Zum Angular-Buch</a>

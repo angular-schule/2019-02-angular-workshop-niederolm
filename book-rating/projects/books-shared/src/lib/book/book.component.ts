@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Book } from '../shared/book';
-import { BookRatingService } from '../shared/book-rating.service';
 
 @Component({
   selector: 'lib-book',
@@ -11,21 +10,20 @@ import { BookRatingService } from '../shared/book-rating.service';
 export class BookComponent implements OnInit {
 
   @Input() book: Book;
-  @Output() rate = new EventEmitter<Book>();
+  @Output() rateUp = new EventEmitter();
+  @Output() rateDown = new EventEmitter();
 
-  constructor(private rs: BookRatingService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  rateUp() {
-    const ratedBook = this.rs.rateUp(this.book);
-    this.rate.emit(ratedBook);
+  doRateUp() {
+    this.rateUp.emit();
   }
 
-  rateDown() {
-    const ratedBook = this.rs.rateDown(this.book);
-    this.rate.emit(ratedBook);
+  doRateDown() {
+    this.rateDown.emit();
   }
 
   log() {

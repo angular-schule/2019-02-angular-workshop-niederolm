@@ -3,7 +3,7 @@ import { Book } from 'books-shared';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { State } from '../../reducers';
-import { LoadBooks } from '../actions/book.actions';
+import { LoadBooks, RateDown, RateUp } from '../actions/book.actions';
 import { getAllBooks, getBooksLoading, getLimitedBooks } from '../selectors/book.selectors';
 import { tap, map } from 'rxjs/operators';
 
@@ -20,14 +20,15 @@ export class DashboardComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
-    // this.books = this.bs.getAllStatic();
-    // this.books$ = this.bs.getAll();
     this.store.dispatch(new LoadBooks());
   }
 
-  updateList(book: Book) {
-    // TODO
-    // this.books = this.books.map(b => b.isbn === book.isbn ? book : b);
+  rateUp(isbn: string) {
+    this.store.dispatch(new RateUp({ isbn }));
+  }
+
+  rateDown(isbn: string) {
+    this.store.dispatch(new RateDown({ isbn }));
   }
 
 }

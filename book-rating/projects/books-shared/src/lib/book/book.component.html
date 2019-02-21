@@ -15,8 +15,8 @@
 
     <p>{{ book.description }}</p>
 
-    <button class="btn btn-secondary mr-2" (click)="rateUp()">+</button>
-    <button class="btn btn-secondary mr-2" (click)="rateDown()">–</button>
+    <button class="btn btn-secondary mr-2" (click)="doRateUp()">+</button>
+    <button class="btn btn-secondary mr-2" (click)="doRateDown()">–</button>
 
     <a [routerLink]="['/books', book.isbn]">Details</a>
   </div>

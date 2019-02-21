@@ -39,6 +39,34 @@ export function reducer(state = initialState, action: BookActions): State {
       return adapter.upsertOne(book, state);
     }
 
+    case BookActionTypes.RateUp: {
+      const { isbn } = action.payload;
+      const book = state.entities[isbn];
+
+      const update = {
+        id: isbn,
+        changes: {
+          rating: Math.min(5, book.rating + 1)
+        }
+      };
+
+      return adapter.updateOne(update, state);
+    }
+
+    case BookActionTypes.RateDown: {
+      const { isbn } = action.payload;
+      const book = state.entities[isbn];
+
+      const update = {
+        id: isbn,
+        changes: {
+          rating: Math.max(1, book.rating - 1)
+        }
+      };
+
+      return adapter.updateOne(update, state);
+    }
+
     default:
       return state;
   }

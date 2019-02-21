@@ -3,6 +3,5 @@
 <lib-book
   *ngFor="let b of books$ | async"
   [book]="b"
-  (rate)="updateList($event)"></lib-book>
-
-<br-fancy-button></br-fancy-button>
+  (rateUp)="rateUp(b.isbn)"
+  (rateDown)="rateDown(b.isbn)"></lib-book>
