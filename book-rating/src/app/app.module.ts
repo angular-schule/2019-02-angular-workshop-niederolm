@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
-    StatePlaygroundComponent
+    StatePlaygroundComponent,
   ],
   imports: [
     BrowserModule,

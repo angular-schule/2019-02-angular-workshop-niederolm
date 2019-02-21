@@ -67,6 +67,12 @@ export function reducer(state = initialState, action: BookActions): State {
       return adapter.updateOne(update, state);
     }
 
+    case BookActionTypes.CreateBook: {
+      const { book } = action.payload;
+
+      return adapter.addOne(book, state);
+    }
+
     default:
       return state;
   }

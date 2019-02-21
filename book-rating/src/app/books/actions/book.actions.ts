@@ -10,6 +10,8 @@ export enum BookActionTypes {
   LoadBookSuccess = '[Book] Load Book Success',
   RateUp = '[Book] Rate Up',
   RateDown = '[Book] Rate Down',
+  CreateBook = '[Book] Create Book',
+  CreateBookSuccess = '[Book] Create Book Success',
 }
 
 export class LoadBooks implements Action {
@@ -36,6 +38,16 @@ export class LoadBookSuccess implements Action {
   constructor(public payload: { book: Book }) {}
 }
 
+export class CreateBook implements Action {
+  readonly type = BookActionTypes.CreateBook;
+  constructor(public payload: { book: Book }) {}
+}
+
+export class CreateBookSuccess implements Action {
+  readonly type = BookActionTypes.CreateBookSuccess;
+  // constructor(public payload: { book: Book }) {}
+}
+
 export class RateUp implements Action {
   readonly type = BookActionTypes.RateUp;
   constructor(public payload: { isbn: string }) {}
@@ -53,4 +65,6 @@ export type BookActions =
  | LoadBook
  | LoadBookSuccess
  | RateUp
- | RateDown;
+ | RateDown
+ | CreateBook
+ | CreateBookSuccess;

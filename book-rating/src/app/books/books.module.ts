@@ -13,6 +13,8 @@ import * as fromBook from './reducers/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './effects/book.effects';
 import { BookDetailsContainerComponent } from './book-details-container/book-details-container.component';
+import { CreateBookContainerComponent } from './create-book-container/create-book-container.component';
+import { BookFormComponent } from './book-form/book-form.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { BookDetailsContainerComponent } from './book-details-container/book-det
     BookDetailsComponent,
     SearchComponent,
     BookDetailsContainerComponent,
+    CreateBookContainerComponent,
+    BookFormComponent,
   ],
   imports: [
     CommonModule,
