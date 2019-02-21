@@ -3,10 +3,13 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 
 
-import { BookActionTypes, LoadBooksSuccess, LoadBooksFail, LoadBook, LoadBookSuccess } from '../actions/book.actions';
+import { BookActionTypes, LoadBooksSuccess, LoadBooksFail, LoadBook, LoadBookSuccess, BookActions } from '../actions/book.actions';
 import { BookStoreService } from '../shared/book-store.service';
-import { map, exhaustMap, catchError, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { map, exhaustMap, catchError, mergeMap, withLatestFrom, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { State } from '../../reducers';
+import { getAllBooks } from '../selectors/book.selectors';
 
 @Injectable()
 export class BookEffects {
@@ -22,12 +25,16 @@ export class BookEffects {
 
   @Effect()
   loadBook$ = this.actions$.pipe(
-    ofType<LoadBook>(BookActionTypes.LoadBook),
+    ofType(BookActionTypes.LoadBook),
     map(action => action.payload.isbn),
-    mergeMap(isbn => this.bs.getSingle(isbn)),
+    withLatestFrom(this.store.pipe(select(getAllBooks))), // [isbn, books]
+    filter(([isbn, books]) => !books.find(b => b.isbn === isbn)),
+    mergeMap(([isbn]) => this.bs.getSingle(isbn)),
     map(book => new LoadBookSuccess({ book }))
   );
 
-  constructor(private actions$: Actions, private bs: BookStoreService) {}
-
+  constructor(
+    private actions$: Actions<BookActions>,
+    private bs: BookStoreService,
+    private store: Store<State>) {}
 }
